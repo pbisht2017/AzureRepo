@@ -2,10 +2,10 @@
 provider "azurerm" {
   version = "2.32.0"
 
-client_secret    = ".WALhr8~rO~WQv4AE0nu~F94ZTC.5O-hGE"
-client_id        = "c577b289-d737-4707-a4e0-36b4f8fe3682"
-subscription_id  = "3caab25b-163a-4864-8816-20f9af09d1a0"
-tenant_id        = "c5ed1c03-8dc8-4e79-822c-529139a7f3ce"
+client_id = "c577b289-d737-4707-a4e0-36b4f8fe3682"
+client_secret = ".dV-~VOy4hM-Wpzr9A99_FeTv.d5gyJ97M"
+tenant_id     = "c5ed1c03-8dc8-4e79-822c-529139a7f3ce"
+subscription_id = "3caab25b-163a-4864-8816-20f9af09d1a0"
   
   features {}
 }
@@ -31,7 +31,6 @@ module "vnet_module2" {
   vnet_environment_name_tag           = var.vn2environment_name_tag
 }
 
-
 ##-----------------------Create Virtual Machine----------------------------------------------------##
 
 
@@ -41,6 +40,7 @@ module "jumphost" {
   armvm_nic_name                    = var.vm_jumphost_nicname
   armvm_location                    = var.resource_group_location
   armvm_resgrp_name                 = var.resource_group_name
+  storage_image_reference           = var.jumphost_storage_image_reference
   armvm_size                        = var.vm_jumphost_size
   armvm_subnetid                    = module.vnet_module1.subnets_id[4]
   armvm_pvtipaddr_alloc             = var.vm_jumphost_pvtipaddr_allocation
@@ -52,8 +52,8 @@ module "jumphost" {
   vm_ddisk_0_size                   = var.vm_jumphost_ddisk_0_size
   vm_managedddisk_0_type            = var.vm_jumphost_managedddisk_0_type
   armvm_hostname                    = var.vm_jumphost_name
-  /*armvm_hostadmin_name              = var.vm_jumphost_hostadmin_name
-  armvm_hostadmin_pwd               = var.vm_jumphost_hostadmin_pwd*/
+  armvm_hostadmin_name              = var.vm_jumphost_hostadmin_name
+  armvm_hostadmin_pwd               = var.vm_jumphost_hostadmin_pwd
   armvm_name_tag                    = var.vm_jumphost_nametag
   armvm_nicname_tag                 = var.vm_jumphost_nicnametag
 

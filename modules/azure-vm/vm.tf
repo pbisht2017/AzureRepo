@@ -1,17 +1,3 @@
-  data "azurerm_resource_group" "image"{
-    name = "dockerRG"
-  }
-
-  data "azurerm_image" "image" {
-     name = "customLinux-2021-05-22-229"
-     resource_group_name = data.azurerm_resource_group.image.name
-}
-
-data "azurerm_key_vault_secret" "mySecret" {
-name = "apadmin"
-key_vault_id = "/subscriptions/3caab25b-163a-4864-8816-20f9af09d1a0/resourceGroups/dockerRG/providers/Microsoft.KeyVault/vaults/vault-docker12"
-}
-
 resource "azurerm_virtual_machine" "main" {
   name                  = var.armvm_name
   location              = var.armvm_location
@@ -21,14 +7,17 @@ resource "azurerm_virtual_machine" "main" {
   delete_os_disk_on_termination = true
   delete_data_disks_on_termination = true
 
+  storage_image_reference {
+    id = var.storage_image_reference
+  }
 
-
-storage_image_reference {
-  id = data.azurerm_image.image.id
-}  
-
-   os_profile_linux_config {
-    disable_password_authentication = false
+  dynamic "os_profile_windows_config"{
+      for_each = var.vm_os_profile_windows_config
+      content {
+          provision_vm_agent        = lookup(os_profile_windows_config.value, "provision_vm_agent", null)
+          enable_automatic_upgrades = lookup(os_profile_windows_config.value, "enable_automatic_upgrades", null)
+          timezone                  = lookup(os_profile_windows_config.value, "timezone", null)
+      }
   }
 
   storage_os_disk {
@@ -51,23 +40,22 @@ storage_image_reference {
 
   os_profile {
     computer_name  = var.armvm_hostname
-    admin_username = "apadmin"
-    admin_password = "${data.azurerm_key_vault_secret.mySecret.value}"
+    admin_username = var.armvm_hostadmin_name
+    admin_password = var.armvm_hostadmin_pwd
   }
   
   tags = {
-      Environment = var.armvm_name_tag 
+      Environment        = var.armvm_name_tag 
     }
-
 }
-#-----------NIC---------------------------------- 
 
+#-----------NIC---------------------------------- 
 
 resource "azurerm_public_ip" "vm-nic-pip" {
   name                = var.armvm_name
   resource_group_name = var.armvm_resgrp_name
   location            = var.armvm_location
-  allocation_method   = "Dynamic"
+  allocation_method   = "Static"
   sku                 = "Basic"
 
   tags = {

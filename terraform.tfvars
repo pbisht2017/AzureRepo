@@ -19,17 +19,15 @@ address_prefixvnet2         = {
     "2" = ["Database-Subnet", "172.22.22.0/24" ]
 }
 
-
-
 ##----------------------- Create JUMPHOST SERVER -------------------------------------------##
 
 vm_jumphost_name                = "NKFSINDEVJH"
 vm_jumphost_nicname             = "NKFSINDEVJHNI01"
 vm_jumphost_size                = "Standard_A4_v2"
 vm_jumphost_managedosdisk_type  = "StandardSSD_LRS"
-vm_jumphost_osdisk_boottype     = "Linux"
+vm_jumphost_osdisk_boottype     = "windows"
 vm_jumphost_osdisk_size         = "127"
-/*vm_jumphost_hostadmin_name      = "apadmin"
-vm_jumphost_hostadmin_pwd       = "Thunder@1234"*/
-vm_jumphost_nametag             = "NKFSINDEVJH"
-vm_jumphost_nicnametag          = "NKFSINDEVJHNIC01"
+vm_jumphost_hostadmin_name      = "prateek"
+vm_jumphost_hostadmin_pwd       = "prateek@2019"
+vm_jumphost_nametag             = "NKFSINDEVJHTAG"
+vm_jumphost_nicnametag          = "NKFSINDEVJHNIC0"
