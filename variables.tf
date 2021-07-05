@@ -45,7 +45,7 @@ variable "address_prefixvnet2" {
 # Variable for Storage Image Reference
 variable "jumphost_storage_image_reference" {
   description = "Specify Jumphost reference."
-  default        = "/subscriptions/3caab25b-163a-4864-8816-20f9af09d1a0/resourceGroups/dockerRG/providers/Microsoft.Compute/galleries/win_serv_2016"
+  default        = "/subscriptions/3caab25b-163a-4864-8816-20f9af09d1a0/resourceGroups/dockerRG/providers/Microsoft.Compute/galleries/win_serv_2016/images/win-serv-2016"
 }
 
 # Variable for VM Name
