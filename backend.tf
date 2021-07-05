@@ -4,6 +4,6 @@ terraform {
     storage_account_name = "terrastorage22894"
     container_name       = "development"
     key                  = "development.tfstate"
-    access_key           = "uhpPRiLi8IYyumt4w+ZsLsO0Oo9Jn+R8+Pfjp2Q957rBcabRy6i+FSygmoUJq4mzB32kNwKtoRMUGyevIgjtSg=="
+    access_key           = "0hQnIaC1IOG2CHfNmD0UEVCN7Z/aokQ1yAn78oP2VfPQhWv1dKzxMgENtq2TrJUqLbyaUDwfeCK1F9L6ah0zgA=="
   }
 }
