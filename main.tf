@@ -13,7 +13,7 @@ tenant_id        = "c5ed1c03-8dc8-4e79-822c-529139a7f3ce"
 ##-------------------VIRTUAL NETWORK SETUP WITH SUBNETS AND PEERING-----------------------##
 
 module "vnet_module1" {
-  source = "../modules/azure-vnet"
+  source = "./modules/azure-vnet"
   virtual_network_name                = var.virtual_network_name
   virtual_network_address_space       = var.address_space
   resource_group_location             = var.resource_group_location
@@ -22,7 +22,7 @@ module "vnet_module1" {
   vnet_environment_name_tag           = var.vn1environment_name_tag
 }
 module "vnet_module2" {
-  source = "../modules/azure-vnet"
+  source = "./modules/azure-vnet"
   virtual_network_name                = var.virtual_network1_name
   virtual_network_address_space       = var.address_space_vnet2
   resource_group_location             = var.resource_group_location
@@ -36,7 +36,7 @@ module "vnet_module2" {
 
 
 module "jumphost" {
-  source                            = "../modules/azure-vm"
+  source                            = "./modules/azure-vm"
   armvm_name                        = var.vm_jumphost_name 
   armvm_nic_name                    = var.vm_jumphost_nicname
   armvm_location                    = var.resource_group_location
