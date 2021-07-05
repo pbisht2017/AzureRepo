@@ -8,8 +8,8 @@
 }
 
 data "azurerm_key_vault_secret" "mySecret" {
-name = "apadmin"
-key_vault_id = "/subscriptions/cb676e79-c02d-40d2-a35f-ee9af7a3d535/resourceGroups/dockerRG/providers/Microsoft.KeyVault/vaults/vault-docker"
+name = "vault-docker12"
+key_vault_id = "/subscriptions/3caab25b-163a-4864-8816-20f9af09d1a0/resourceGroups/dockerRG/providers/Microsoft.KeyVault/vaults/vault-docker12"
 }
 
 resource "azurerm_virtual_machine" "main" {
