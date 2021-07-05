@@ -50,7 +50,7 @@ resource "azurerm_virtual_machine" "main" {
 }
 
 #-----------NIC---------------------------------- 
-
+/*
 resource "azurerm_public_ip" "vm-nic-pip" {
   name                = var.armvm_name
   resource_group_name = var.armvm_resgrp_name
@@ -62,7 +62,7 @@ resource "azurerm_public_ip" "vm-nic-pip" {
     Environment = var.armvm_nicname_tag 
   }
 
-}
+}*/
 
 resource "azurerm_network_interface" "vm-nic" {
   name                = var.armvm_name
@@ -73,7 +73,7 @@ resource "azurerm_network_interface" "vm-nic" {
     name                          = var.armvm_nic_name
     subnet_id                     = var.armvm_subnetid
     private_ip_address_allocation = var.armvm_pvtipaddr_alloc
-    public_ip_address_id          = azurerm_public_ip.vm-nic-pip.id
+/*    public_ip_address_id          = azurerm_public_ip.vm-nic-pip.id*/
     
   }
 

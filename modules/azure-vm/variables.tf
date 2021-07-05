@@ -138,7 +138,7 @@ variable "armvm_hostadmin_pwd" {
   type        = string
 }
 
-
+/*
 variable "public_ip_address_allocation" {
   description = "Defines how an IP address is assigned. Options are Static or Dynamic."
   default     = "dynamic"
@@ -148,7 +148,7 @@ variable "nb_public_ip" {
   description = "Number of public IPs to assign corresponding to one IP per vm. Set to 0 to not assign any public IP addresses."
   default     = "1"
 }
-
+*/
 
 # Variable for Storage Image Reference
 variable "storage_image_reference" {
