@@ -64,7 +64,7 @@ variable "vm_jumphost_nicname" {
 variable "vm_jumphost_pvtipaddr_allocation" {
   description = "Defines how a private IP address is assigned. Options are Static or Dynamic."
   type        = string
-  default     = "Static"
+  default     = "Dynamic"
 }
 
 # Variable for Storage Operating System Disk Caching
