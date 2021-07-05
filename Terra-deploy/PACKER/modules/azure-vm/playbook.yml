@@ -1,0 +1,9 @@
+---
+- name: 'provision Image'
+  hosts: default
+
+  tasks:
+    - name: Install Docker
+      yum:
+        name: Docker-ce
+        state: latest
