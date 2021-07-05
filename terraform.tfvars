@@ -23,7 +23,7 @@ address_prefixvnet2         = {
 
 vm_jumphost_name                = "NKFSINDEVJH"
 vm_jumphost_nicname             = "NKFSINDEVJHNI01"
-vm_jumphost_size                = "Standard_A4_v2"
+vm_jumphost_size                = "Standard_D2s_v3"
 vm_jumphost_managedosdisk_type  = "StandardSSD_LRS"
 vm_jumphost_osdisk_boottype     = "windows"
 vm_jumphost_osdisk_size         = "127"
