@@ -1,6 +1,7 @@
 ---
 - name: This sets up an httpd webserver
-  hosts: Apache
+  hosts: webservers
+  become: True
   tasks:
   - name: Install apache packages 
     yum:
@@ -10,3 +11,8 @@
     service:
       name: httpd 
       state: started
+      enabled: True
+  - name: Deploy static website
+    copy:
+      src: index.html
+      dest: /var/www/html/
