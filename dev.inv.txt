@@ -1,0 +1,3 @@
+[webservers]
+20.44.223.182 ansible_user=prateek
+10.0.0.5
