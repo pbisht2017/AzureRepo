@@ -1,0 +1,14 @@
+pipeline{
+    agent any
+    stages{
+        stage('SCM Checkout'){
+            steps{
+                git credentialsId: '98633a9a-6f80-4c9f-b920-879fd36c0aa0', url: 'https://github.com/pbisht2017/AzureRepo'
+            }
+        }
+        stage('Execute Ansible'){
+            steps{
+                ansiblePlaybook credentialsId: 'bfef8102-7c34-459a-83f8-131f31421d2d', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'dev.inv.txt', playbook: 'apache.yml'            }
+        }
+    }
+}
