@@ -58,17 +58,6 @@ variable "armvm_pvtipaddr_alloc" {
 # DECLARING VIRTUAL MACHINE DETAILS
 #-----------------------------------
 
-# Variable for Operating System Profile windows configuration 
-variable "vm_os_profile_windows_config" {
-  description = "A os_profile_windows_config block supports the following"
-  type        = list(map(string))
-  default     = [{
-      "provision_vm_agent"              : "true"
-      "enable_automatic_upgrades"       : "false"
-      "timezone"                        : "Singapore Standard Time"
-  }]
-}
-
 # Variable for Storage Operating System Disk Caching
 variable "vm_osdisk_caching" {
     description = "Specifies the caching requirements for the OS Disk. Possible values include None, ReadOnly and ReadWrite."
@@ -132,13 +121,13 @@ variable "armvm_hostadmin_name" {
   type        = string
 }
 
+
 # Variable for Virtual Machine Host Admin Password
 variable "armvm_hostadmin_pwd" {
   description = "The password associated with the local administrator account."
   type        = string
 }
 
-/*
 variable "public_ip_address_allocation" {
   description = "Defines how an IP address is assigned. Options are Static or Dynamic."
   default     = "dynamic"
@@ -147,10 +136,4 @@ variable "public_ip_address_allocation" {
 variable "nb_public_ip" {
   description = "Number of public IPs to assign corresponding to one IP per vm. Set to 0 to not assign any public IP addresses."
   default     = "1"
-}
-*/
-
-# Variable for Storage Image Reference
-variable "storage_image_reference" {
-  description = "It's a storage Image reference"
 }

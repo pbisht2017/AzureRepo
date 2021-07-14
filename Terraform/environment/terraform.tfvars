@@ -1,7 +1,7 @@
 ##------------------------Creating Virtual Network and Resource Group----------------##
 
-virtual_network_name        = "NKFSINDVVN01"
-virtual_network1_name       = "NKFSINDVVN02"
+virtual_network_name        = "NKFSINDVVN01203"
+virtual_network1_name       = "NKFSINDVVN02203"
 address_space               = ["172.21.0.0/16"]
 address_space_vnet2         = ["172.22.0.0/16"]
 address_prefix              = {
@@ -19,15 +19,17 @@ address_prefixvnet2         = {
     "2" = ["Database-Subnet", "172.22.22.0/24" ]
 }
 
+
+
 ##----------------------- Create JUMPHOST SERVER -------------------------------------------##
 
-vm_jumphost_name                = "NKFSINDEVJH"
+vm_jumphost_name                = "NKFSINDEVJH134"
 vm_jumphost_nicname             = "NKFSINDEVJHNI01"
-vm_jumphost_size                = "Standard_D2ds_v4"
+vm_jumphost_size                = "Standard_D1"
 vm_jumphost_managedosdisk_type  = "StandardSSD_LRS"
-vm_jumphost_osdisk_boottype     = "windows"
+vm_jumphost_osdisk_boottype     = "Linux"
 vm_jumphost_osdisk_size         = "127"
-vm_jumphost_hostadmin_name      = "prateek"
-vm_jumphost_hostadmin_pwd       = "prateek@2019"
-vm_jumphost_nametag             = "NKFSINDEVJHTAG"
-vm_jumphost_nicnametag          = "NKFSINDEVJHNIC0"
+vm_jumphost_hostadmin_name      = "apadmin"
+vm_jumphost_hostadmin_pwd       = "Thunder@1234"
+vm_jumphost_nametag             = "NKFSINDEVJH"
+vm_jumphost_nicnametag          = "NKFSINDEVJHNIC01"

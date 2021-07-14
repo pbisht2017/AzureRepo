@@ -1,6 +1,6 @@
 variable "resource_group_name" {
   #description = "The name of the Resource Group that we want to attach"
-  default = "dockerRG"
+  default = "Terraform-Deploy"
 }
 variable "vn1environment_name_tag" {
    # description = "The name of the environment name to Tag"
@@ -12,7 +12,7 @@ variable "vn2environment_name_tag" {
 }
 variable "resource_group_location" {
   #description = "The name of the location that resource group created"
-  default = "southeastasia"   
+  default = "Southeast Asia"   
 }
 variable "virtual_network_name" {
   #description = "The name of the Virtual Network name"
@@ -39,14 +39,11 @@ variable "address_prefixvnet2" {
   type = map
 }
 
+
+
+
 ##------------------------------ SETUP JUMPHOST SERVER  ---------------------------------##
 
-
-# Variable for Storage Image Reference
-variable "jumphost_storage_image_reference" {
-  description = "Specify Jumphost reference."
-  default        = "/subscriptions/3caab25b-163a-4864-8816-20f9af09d1a0/resourceGroups/dockerRG/providers/Microsoft.Compute/galleries/win_serv_2016/images/win-serv-2016"
-}
 
 # Variable for VM Name
 variable "vm_jumphost_name" {
@@ -64,7 +61,7 @@ variable "vm_jumphost_nicname" {
 variable "vm_jumphost_pvtipaddr_allocation" {
   description = "Defines how a private IP address is assigned. Options are Static or Dynamic."
   type        = string
-  default     = "Dynamic"
+  default     = "dynamic"
 }
 
 # Variable for Storage Operating System Disk Caching
@@ -124,6 +121,7 @@ variable "vm_jumphost_hostadmin_name" {
   description = "Specifies the name of the local administrator account."
   type        = string
 }
+
 
 # Variable for Virtual Machine Host Admin Password
 variable "vm_jumphost_hostadmin_pwd" {
