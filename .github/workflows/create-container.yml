@@ -22,4 +22,4 @@ jobs:
         run: docker ps
 
       - name: Test container output (optional curl test)
-        run: curl http://localhost:8081 || echo "Container not responding"
+        run: curl http://localhost:8081 || echo "Container not respond"
