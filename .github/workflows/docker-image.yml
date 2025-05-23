@@ -35,6 +35,8 @@ jobs:
         tags: pbisht2017/prateek-nginx-image:latest
 
     - uses: actions/checkout@v4
-    - name: build container from docker image
-      run: 
-        docker run -d -p 8081:80 pbisht2017/prateek-nginx-image:latest
+    - name: pull docker image from docker hub
+      run: docker pull prateek-nginx-image:latest
+        
+    - name: build container from docker image    
+      run:  docker run -d -p 8081:80 pbisht2017/prateek-nginx-image:latest
