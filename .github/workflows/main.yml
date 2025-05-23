@@ -1,0 +1,25 @@
+name: Deploy Container
+
+on:
+  workflow_run:
+    workflows: ["Docker Image CI"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: Pull Docker image
+        run: docker pull pbisht2017/prateek-nginx-image:latest
+
+      - name: Run Docker container
+        run: |
+          docker stop prateek-container || true
+          docker rm prateek-container || true
+          docker run -d --name prateek-container -p 8080:80 pbisht2017/prateek-nginx-image:latest
+
+      - name: Verify container
+        run: docker ps
