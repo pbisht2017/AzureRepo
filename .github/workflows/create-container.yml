@@ -1,0 +1,25 @@
+name: Pull and Run Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  pull-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Pull Docker image from Docker Hub
+        run: docker pull pbisht2017/prateek-nginx-image:latest
+
+      - name: Run Docker container from the image
+        run: |
+          docker run -d --name prateek-nginx-test -p 8081:80 pbisht2017/prateek-nginx-image:latest
+          sleep 5  # Give it a moment to start
+
+      - name: Verify container is running
+        run: docker ps
+
+      - name: Test container output (optional curl test)
+        run: curl http://localhost:8081 || echo "Container not responding"
