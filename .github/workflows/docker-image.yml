@@ -33,3 +33,7 @@ jobs:
         context: .
         push: true
         tags: pbisht2017/prateek-nginx-image:latest
+
+    - uses: actions/checkout@v4
+    - name: build container from docker image
+      run: docker run -d -p 8081:80 docker/prateek-nginx-image
