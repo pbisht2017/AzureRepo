@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  create-acr:
+  stage-1:
     runs-on: ubuntu-latest
 
     steps:
@@ -46,9 +46,40 @@ jobs:
             --name my-app-service-103085 \
             --runtime "PYTHON:3.10" \
             --deployment-local-git
-  test:
+
+  stage-2:
+    needs: stage-1
     runs-on: ubuntu-latest
-    needs: create-acr
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Set ACR login server
+        id: acr
+        run: |
+          ACR_NAME="myacr103085"
+          echo "ACR_LOGIN_SERVER=${ACR_NAME}.azurecr.io" >> $GITHUB_ENV
+
+      - name: Azure CLI - Login to ACR
+        run: |
+          az acr login --name myacr103085
+
+      - name: Build and Push Docker image
+        run: |
+          IMAGE_TAG=${{ env.ACR_LOGIN_SERVER }}/nginx:${{ github.sha }}
+          docker build -t $IMAGE_TAG .
+          docker build . --file Dockerfile --tag $IMAGE_TAG
+          docker push $IMAGE_TAG
+
+  stage-3:
+    runs-on: ubuntu-latest
+    needs: stage-2
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -63,7 +94,7 @@ jobs:
           RESOURCE_GROUP="myrg"
           WEBAPP_NAME="my-app-service-103085"
           ACR_NAME="myacr103085"
-          IMAGE_NAME="myacr103085.azurecr.io/nginx:426312a4e9a3f0448f9ef94ae44557ccbc808dd2"
+          IMAGE_NAME="myacr103085.azurecr.io/nginx:${{ github.sha }}"
 
           az webapp config container set \
             --name $WEBAPP_NAME \
