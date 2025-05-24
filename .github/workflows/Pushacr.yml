@@ -1,0 +1,29 @@
+name: Build and Push to ACR
+
+on:
+  push:
+    paths:
+      - '.github/workflows/Pushacr.yml'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Azure CLI - Login to ACR
+        run: |
+          az acr login --name myprateekacr103085.azurecr.io
+
+      - name: Build and Push Docker image
+        run: |
+          IMAGE_TAG=myprateekacr103085.azurecr.io/myapp:latest
+          docker build -t $IMAGE_TAG .
+          docker push $IMAGE_TAG
