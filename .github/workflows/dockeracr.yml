@@ -1,4 +1,4 @@
-name: create ACR
+name: create Docker image
 
 on:
   push:
