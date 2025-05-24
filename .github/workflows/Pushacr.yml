@@ -25,4 +25,4 @@ jobs:
       - name: Build and Push Docker image
         run: |
           docker build . --file Dockerfile --tag nginx-image:$(date +%s)
-          docker push myprateekacr103085.azurecr.io/nginx-image:latest
+          docker push myprateekacr103085.azurecr.io/nginx-image:$(date +%s)
