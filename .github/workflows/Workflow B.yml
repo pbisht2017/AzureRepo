@@ -1,4 +1,4 @@
-name: Create Azure Storage Account
+name: Create Azure Container Registry
 
 on:
   push:
