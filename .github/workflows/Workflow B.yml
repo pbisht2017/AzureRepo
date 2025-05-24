@@ -24,12 +24,12 @@ jobs:
             --name myrs103085 \
             --location eastus
 
-      - name: Create Storage Account
+      - name: Create Azure Container Registry
         run: |
-          az storage account create \
-            --name mystorageacct103084 \
+          az acr create \
             --resource-group myrs103085 \
-            --location eastus \
-            --sku Standard_GRS
+            --name myUniqueAcr103085 \
+            --sku Basic \
+            --admin-enabled true
 
       
