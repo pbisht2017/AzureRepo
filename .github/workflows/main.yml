@@ -46,3 +46,16 @@ jobs:
             --name my-app-service-103085 \
             --runtime "PYTHON:3.10" \
             --deployment-local-git
+
+      - name: Configure Web App to use ACR image
+        run: |
+          RESOURCE_GROUP="myrg"
+          WEBAPP_NAME="my-app-service-103085"
+          ACR_NAME="myacr103085"
+          IMAGE_NAME="myacr103085.azurecr.io/nginx:latest"
+
+          az webapp config container set \
+            --name $WEBAPP_NAME \
+            --resource-group $RESOURCE_GROUP \
+            --docker-custom-image-name $IMAGE_NAME \
+            --docker-registry-server-url https://$ACR_NAME.azurecr.io
