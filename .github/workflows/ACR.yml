@@ -21,12 +21,12 @@ jobs:
       - name: Set ACR login server
         id: acr
         run: |
-          ACR_NAME="myacr"
+          ACR_NAME="myacr103085"
           echo "ACR_LOGIN_SERVER=${ACR_NAME}.azurecr.io" >> $GITHUB_ENV
 
       - name: Azure CLI - Login to ACR
         run: |
-          az acr login --name myacr
+          az acr login --name myacr103085
 
       - name: Build and Push Docker image
         run: |
