@@ -28,7 +28,7 @@ jobs:
         run: |
           az acr create \
             --resource-group myrs103085 \
-            --name myUniqueAcr103085 \
+            --name myprateekacr103085 \
             --sku Basic \
             --admin-enabled true
 
