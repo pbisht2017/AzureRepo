@@ -1,7 +1,9 @@
 name: Create Azure Storage Account
 
 on:
-  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/Workflow B.yml'
 
 jobs:
   create-storage:
