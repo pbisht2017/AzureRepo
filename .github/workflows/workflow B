@@ -13,7 +13,7 @@ jobs:
       - name: Pull image from Docker Hub
         run: docker pull pbisht2017/prateek-nginx-image:latest
 
-      - name: Run the image (optional)
+      - name: Run the image (option)
         run: |
           docker run -d --name nginx-test -p 8080:80 pbisht2017/prateek-nginx-image:latest
           sleep 5
