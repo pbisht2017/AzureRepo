@@ -26,7 +26,7 @@ jobs:
         run: |
           az storage account create \
             --name mystorageacct103084 \
-            --resource-group myrs103084 \
+            --resource-group myrs103085 \
             --location eastus \
             --sku Standard_LRS
 
