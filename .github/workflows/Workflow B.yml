@@ -1,0 +1,33 @@
+name: Create Azure Storage Account
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-storage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Create Resource Group
+        run: |
+          az group create \
+            --name myrs103085 \
+            --location eastus
+
+      - name: Create Storage Account
+        run: |
+          az storage account create \
+            --name mystorageacct103085 \
+            --resource-group myrs103085 \
+            --location eastus \
+            --sku Standard_LRS
+
+      
