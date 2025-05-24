@@ -31,7 +31,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: myprateekacr103085/nginx-image:latest
+        tags: myprateekacr103085.azurecr.io/nginx-image:latest
    
 
   pull-docker-image:
@@ -40,10 +40,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Pull image from Docker Hub
-        run: docker pull myprateekacr103085/nginx-image:latest
+        run: docker pull myprateekacr103085.azurecr.io/nginx-image:latest
 
       - name: Run the image (optional)
         run: |
-          docker run -d --name nginx-test -p 8080:80 myprateekacr103085/nginx-image:latest
+          docker run -d --name nginx-test -p 8080:80 myprateekacr103085.azurecr.io/nginx-image:latest
           sleep 5
           docker ps
