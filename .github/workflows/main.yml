@@ -29,3 +29,20 @@ jobs:
             --name myacr103085 \
             --sku Basic \
             --admin-enabled true
+
+      - name: Create App Service Plan
+        run: |
+          az appservice plan create \
+            --name myAppServicePlan103085 \
+            --resource-group myrg \
+            --sku B1 \
+            --is-linux
+
+      - name: Create Web App
+        run: |
+          az webapp create \
+            --resource-group myrg \
+            --plan myAppServicePlan103085 \
+            --name my-app-service-103085 \
+            --runtime "PYTHON:3.10" \
+            --deployment-local-git
