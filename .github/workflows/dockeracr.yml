@@ -1,9 +1,9 @@
-name: Workflow A
+name: create ACR
 
 on:
   push:
     paths:
-      - '.github/workflows/docker.yml'
+      - '.github/workflows/dockeracr.yml'
     
 jobs:
 

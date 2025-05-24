@@ -3,7 +3,7 @@ name: Create Azure Container Registry
 on:
   push:
     paths:
-      - '.github/workflows/Workflow B.yml'
+      - '.github/workflows/ACR.yml'
 
 jobs:
   create-storage:
