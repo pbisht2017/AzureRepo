@@ -1,0 +1,31 @@
+name: Create Azure container registry
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-storage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Create Resource Group
+        run: |
+          az group create \
+            --name myrg \
+            --location eastus
+
+      - name: Create Azure Container Registry
+        run: |
+          az acr create \
+            --resource-group myrg \
+            --name myAcr103085 \
+            --sku Basic \
+            --admin-enabled true
