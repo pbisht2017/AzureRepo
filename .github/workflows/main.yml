@@ -26,6 +26,6 @@ jobs:
         run: |
           az acr create \
             --resource-group myrg \
-            --name myAcr103085 \
+            --name myacr103085 \
             --sku Basic \
             --admin-enabled true
