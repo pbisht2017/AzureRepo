@@ -3,8 +3,8 @@ name: Deploy Monitoring Stack
 on:
   push:
     paths:
-      - 'infra/**'
-      - 'ansible/**'
+      - 'Infra/**'
+      - 'Ansible/**'
       - '.github/workflows/deploy-monitoring.yml'
 
 jobs:
