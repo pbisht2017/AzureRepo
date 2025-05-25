@@ -29,6 +29,7 @@ jobs:
       working-directory: ./Infra
       run: |
         terraform init
+        terraform import azurerm_resource_group.rg /subscriptions/07fba9c5-f9fe-46d8-becc-50307a4f1ed7/resourceGroups/MonitoringRG
         terraform apply -auto-approve
 
     - name: Get VM IP
