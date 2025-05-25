@@ -1,0 +1,51 @@
+- name: Install Prometheus and Grafana
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Install required packages
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      loop:
+        - wget
+        - curl
+        - software-properties-common
+        - gnupg2
+
+    - name: Install Grafana
+      shell: |
+        curl https://packages.grafana.com/gpg.key | apt-key add -
+        add-apt-repository "deb https://packages.grafana.com/oss/deb stable main"
+        apt-get update && apt-get install grafana -y
+        systemctl enable grafana-server
+        systemctl start grafana-server
+
+    - name: Install Prometheus
+      shell: |
+        cd /opt
+        wget https://github.com/prometheus/prometheus/releases/download/v2.48.1/prometheus-2.48.1.linux-amd64.tar.gz
+        tar xvf prometheus-2.48.1.linux-amd64.tar.gz
+        mv prometheus-2.48.1.linux-amd64 prometheus
+        useradd --no-create-home --shell /bin/false prometheus
+        chown -R prometheus:prometheus /opt/prometheus
+        cp /opt/prometheus/prometheus /usr/local/bin/
+        cp /opt/prometheus/promtool /usr/local/bin/
+        mkdir -p /etc/prometheus /var/lib/prometheus
+        cp -r /opt/prometheus/consoles /opt/prometheus/console_libraries /etc/prometheus
+        cp /opt/prometheus/prometheus.yml /etc/prometheus/prometheus.yml
+        chown -R prometheus:prometheus /etc/prometheus /var/lib/prometheus
+        echo "[Unit]
+        Description=Prometheus
+        After=network.target
+
+        [Service]
+        User=prometheus
+        ExecStart=/usr/local/bin/prometheus --config.file=/etc/prometheus/prometheus.yml
+
+        [Install]
+        WantedBy=multi-user.target" > /etc/systemd/system/prometheus.service
+        systemctl daemon-reexec
+        systemctl enable prometheus
+        systemctl start prometheus
