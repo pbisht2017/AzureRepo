@@ -21,7 +21,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Terraform Init & Apply
-      working-directory: ./infra
+      working-directory: ./Infra
       run: |
         terraform init
         terraform apply -auto-approve
@@ -35,7 +35,7 @@ jobs:
     - name: Ansible Playbook Execution
       uses: dawidd6/action-ansible-playbook@v2
       with:
-        playbook: ansible/playbook.yml
+        playbook: Ansible/playbook.yml
         inventory: '${{ steps.ip.outputs.ip }},'
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         options: |
