@@ -44,4 +44,4 @@ jobs:
         inventory: '${{ steps.ip.outputs.ip }},'
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         options: |
-          --user azureuser
+          --user azureadmin
