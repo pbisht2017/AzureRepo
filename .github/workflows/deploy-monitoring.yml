@@ -35,7 +35,6 @@ jobs:
         terraform import azurerm_network_security_group.nsg /subscriptions/07fba9c5-f9fe-46d8-becc-50307a4f1ed7/resourceGroups/MonitoringRG/providers/Microsoft.Network/networkSecurityGroups/monitoring-nsg
         terraform import azurerm_subnet.subnet /subscriptions/07fba9c5-f9fe-46d8-becc-50307a4f1ed7/resourceGroups/MonitoringRG/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet
         terraform import azurerm_network_interface.nic /subscriptions/07fba9c5-f9fe-46d8-becc-50307a4f1ed7/resourceGroups/MonitoringRG/providers/Microsoft.Network/networkInterfaces/nic
-        terraform import azurerm_network_interface_security_group_association.nsg_association /subscriptions/07fba9c5-f9fe-46d8-becc-50307a4f1ed7/resourceGroups/MonitoringRG/providers/Microsoft.Network/networkInterfaces/nic|/subscriptions/07fba9c5-f9fe-46d8-becc-50307a4f1ed7/resourceGroups/MonitoringRG/providers/Microsoft.Network/networkSecurityGroups/monitoring-nsg
         terraform apply -auto-approve
 
     - name: Get VM IP's
