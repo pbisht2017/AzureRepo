@@ -100,6 +100,6 @@ resource "azurerm_linux_virtual_machine" "vm" {
     publisher = "Canonical"
     offer     = "UbuntuServer"
     sku       = "22_04-lts"
-    version   = "22.04 LTS"
+    version   = "latest"
   }
 }
