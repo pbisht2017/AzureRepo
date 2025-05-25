@@ -31,7 +31,7 @@ jobs:
         terraform init
         terraform apply -auto-approve
 
-    - name: Get VM IP
+    - name: Get VM IP's
       id: ip
       run: |
         IP=$(az vm show -d -g MonitoringRG -n monitoring-vm --query publicIps -o tsv)
