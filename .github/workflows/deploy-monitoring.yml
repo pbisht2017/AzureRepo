@@ -30,6 +30,10 @@ jobs:
       run: |
         terraform init
         terraform import azurerm_resource_group.rg /subscriptions/07fba9c5-f9fe-46d8-becc-50307a4f1ed7/resourceGroups/MonitoringRG
+        terraform import azurerm_virtual_network.vnet /subscriptions/07fba9c5-f9fe-46d8-becc-50307a4f1ed7/resourceGroups/MonitoringRG/providers/Microsoft.Network/virtualNetworks/vnet
+        terraform import azurerm_public_ip.public_ip /subscriptions/07fba9c5-f9fe-46d8-becc-50307a4f1ed7/resourceGroups/MonitoringRG/providers/Microsoft.Network/publicIPAddresses/public-ip
+        terraform import azurerm_network_security_group.nsg /subscriptions/07fba9c5-f9fe-46d8-becc-50307a4f1ed7/resourceGroups/MonitoringRG/providers/Microsoft.Network/networkSecurityGroups/monitoring-nsg
+        terraform import azurerm_virt
         terraform apply -auto-approve
 
     - name: Get VM IP
