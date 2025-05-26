@@ -6,7 +6,6 @@ on:
       - 'Infra/**'
       - 'Ansible/**'
       - '.github/workflows/deploy-monitoring.yml'
-  workflow_dispatch:
 
 jobs:
   deploy:
