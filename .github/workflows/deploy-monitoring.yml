@@ -34,7 +34,7 @@ jobs:
     - name: Get VM IP's
       id: ip
       run: |
-        IP=$(az vm show -d -g MonitoringRG -n monitoring-vm --query publicIps -o tsv)
+        IP=$(az vm show -d -g MonitoringRG -n monitoring-vm103085 --query publicIps -o tsv)
         echo "ip=$IP" >> $GITHUB_OUTPUT
 
     - name: Ansible Playbook Execution
