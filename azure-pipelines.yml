@@ -11,7 +11,7 @@ variables:
   terraformWorkingDirectory: './terraform' 
 
   # Set Azure service connection name
-  azureServiceConnection: 'your-azure-rm-service-connection'
+  azureServiceConnection: 'github_pbisht2017'
 
 steps:
   - task: TerraformInstaller@1
@@ -23,14 +23,14 @@ steps:
       azureSubscription: $(azureServiceConnection)
       scriptType: bash
       scriptLocation: inlineScript
-      workingDirectory: $(terraformWorkingDirectory)
+      workingDirectory: $(terraformWorkingDirectory)/skip-step
       inlineScript: |
         echo "##[section]Terraform Init"
         terraform init \
-          -backend-config="resource_group_name=<your-rg>" \
-          -backend-config="storage_account_name=<your-storage-account>" \
-          -backend-config="container_name=<your-container>" \
-          -backend-config="key=<your-tfstate-file>.tfstate"
+          -backend-config="resource_group_name=resourcegroup-test-tbd-3" \
+          -backend-config="storage_account_name=mystorage103085" \
+          -backend-config="container_name=tfstate" \
+          -backend-config="key=terraform.tfstate"
 
         echo "##[section]Terraform Validate"
         terraform validate
