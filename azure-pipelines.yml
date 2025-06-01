@@ -5,9 +5,9 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  subscription: Visual Studio Enterprise(07fba9c5-f9fe-46d8-becc-50307a4f1ed7)
+  subscription: My-service-connection
   resourceGroup: resourcegroup-tfstate
-  storageAccount: terraformtfstateskip
+  storageAccount: terraformtfstate103085
   container: tfstate
   tfstateFile: terraform.tfstate
   anyTfChanges: false
