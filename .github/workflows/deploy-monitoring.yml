@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 name: Deploy Monitoring Stacks
 
 on:
@@ -45,3 +46,58 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         options: |
           --user azureadmin
+=======
+name: Deploy Monitoring Stack
+
+on:
+  push:
+    paths:
+      - 'Infra/**'
+      - 'Ansible/**'
+      - '.github/workflows/deploy-monitoring.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.4.2
+
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Terraform Init & Apply
+      working-directory: ./Infra
+      run: |
+        terraform init
+        terraform import azurerm_resource_group.rg /subscriptions/07fba9c5-f9fe-46d8-becc-50307a4f1ed7/resourceGroups/MonitoringRG
+        terraform import azurerm_virtual_network.vnet /subscriptions/07fba9c5-f9fe-46d8-becc-50307a4f1ed7/resourceGroups/MonitoringRG/providers/Microsoft.Network/virtualNetworks/vnet
+        terraform import azurerm_public_ip.public_ip /subscriptions/07fba9c5-f9fe-46d8-becc-50307a4f1ed7/resourceGroups/MonitoringRG/providers/Microsoft.Network/publicIPAddresses/public-ip
+        terraform import azurerm_network_security_group.nsg /subscriptions/07fba9c5-f9fe-46d8-becc-50307a4f1ed7/resourceGroups/MonitoringRG/providers/Microsoft.Network/networkSecurityGroups/monitoring-nsg
+        terraform import azurerm_subnet.subnet /subscriptions/07fba9c5-f9fe-46d8-becc-50307a4f1ed7/resourceGroups/MonitoringRG/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet
+        terraform import azurerm_network_interface.nic /subscriptions/07fba9c5-f9fe-46d8-becc-50307a4f1ed7/resourceGroups/MonitoringRG/providers/Microsoft.Network/networkInterfaces/nic
+        terraform apply -auto-approve
+
+    - name: Get VM IP's
+      id: ip
+      run: |
+        IP=$(az vm show -d -g MonitoringRG -n monitoring-vm --query publicIps -o tsv)
+        echo "ip=$IP" >> $GITHUB_OUTPUT
+
+    - name: Ansible Playbook Execution
+      uses: dawidd6/action-ansible-playbook@v2
+      with:
+        playbook: Ansible/playbook.yml
+        inventory: '${{ steps.ip.outputs.ip }},'
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        options: |
+          --user azureadmin
+>>>>>>> d386810cb76500d55ce1faff9271ff86f27b5b73
