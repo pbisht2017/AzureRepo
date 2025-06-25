@@ -23,9 +23,26 @@ resource "azurerm_kubernetes_cluster" "aks" {
   identity {
     type = "SystemAssigned"
   }
-
   network_profile {
     load_balancer_sku = "standard"
     network_plugin    = "azure" # azure (CNI)
   }
+
+}
+
+resource "azurerm_kubernetes_cluster_node_pool" "userpool" {
+  name                  = "usernp"
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.aks.id
+  vm_size               = "Standard_DS2_v2"
+  node_count            = 2
+  node_labels = {
+    role = "app"
+  }
+  mode                  = "User"
+  orchestrator_version  = azurerm_kubernetes_cluster.aks.kubernetes_version
+
+  tags = {
+    Environment = "Dev"
+  }
+
 }
