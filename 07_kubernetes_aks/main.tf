@@ -36,7 +36,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "userpool" {
   vm_size               = "Standard_DS2_v2"
   node_count            = 2
   node_labels = {
-    role = "app"
+    role = "apps"
   }
   mode                  = "User"
   orchestrator_version  = azurerm_kubernetes_cluster.aks.kubernetes_version
