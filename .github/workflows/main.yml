@@ -1,4 +1,4 @@
-name: Create Azure container registry
+name: Create Azure container registries
 
 on:
   workflow_dispatch:
